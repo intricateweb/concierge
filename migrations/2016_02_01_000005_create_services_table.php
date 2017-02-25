@@ -14,6 +14,7 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('type_id')->unsigned()->nullable();
             $table->integer('business_id')->unsigned();
             $table->foreign('business_id')->references('id')->on('businesses')->onDelete('cascade');
             $table->string('slug');
@@ -22,7 +23,6 @@ class CreateServicesTable extends Migration
             $table->string('description');
             $table->string('prerequisites')->nullable();
             $table->string('color', 12)->nullable();
-            $table->integer('type_id')->unsigned()->nullable()->after('id');
             $table->foreign('type_id')->references('id')->on('service_types')->onDelete('cascade');
             $table->softDeletes();
             $table->nullableTimestamps();
